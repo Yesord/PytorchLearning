@@ -1,9 +1,11 @@
 import os
 from sys import path as sys_path
-# script_path = os.path.dirname(os.path.abspath(__file__)) # 获取当前脚本的绝对路径
-# parent_path = os.path.dirname(os.path.dirname(os.path.dirname(script_path))) # 获取当前脚本的上级目录
-# sys_path.append(parent_path) # 将上级目录加入到系统路径中
-sys_path.append(os.path.dirname("G:\Program Files (x86)\ComputerVision\Test"))
+
+script_path = os.path.dirname(os.path.abspath(__file__)) # 获取当前脚本的绝对路径
+parent_path = os.path.dirname(os.path.dirname(script_path)) # 获取当前脚本的上级目录
+print(parent_path)
+sys_path.append(parent_path) # 将上级目录加入到系统路径中
+#sys_path.append(os.path.dirname("G:\Program Files (x86)\ComputerVision\Test"))
 
 from torch.utils.data import Dataset, DataLoader # 导入数据集和数据加载器
 import torch
@@ -48,7 +50,8 @@ class MyNeuralNetwork(nn.Module):
         x = self.hidden_layer_activation(x) # 激活函数
         x = self.hidden_to_output_layer(x) # 隐藏层到输出层
         return x
-
+    
+# 创建数据集类
 class MyDataset(Dataset):
     def __init__(self, x, y):#初始化数据集
         self.x = torch.tensor(x).float() # 将x转换成张量

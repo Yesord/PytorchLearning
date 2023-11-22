@@ -88,7 +88,7 @@ def show_images(images, titles=None, num_cols=None, scale=3, normalize=False):
 
 script_dir = osp.dirname(osp.abspath(__file__)) # 获取当前脚本文件所在目录
 project_dir = osp.dirname(script_dir) # 获取项目所在目录 
-computer_vision_dir = osp.dirname(project_dir) # 获取computer_vision目录 
+computer_vision_dir = osp.dirname(script_dir) # 获取computer_vision目录 
 
 sys.path.append(computer_vision_dir) # 将computer_vision目录添加到系统路径中
 img1_path = osp.join(project_dir, 'img', '13314845299835436.jpeg') # 构造图片路径

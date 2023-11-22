@@ -20,8 +20,8 @@ cuda_verify.check_torch_cuda_version() # 打印PyTorch的CUDA版本
 
 # 创建输入数据
 
-x = [[1,2],[3,4],[5,6],[6,7],[8,9],[10,11],[10,12],[11,13],[12,13],[14,15]] #,[50,15],[70,46],[323,13],[131,515],[123123,2331],[134,4323]
-y = [[3],[7],[11],[13],[17],[21],[22],[24],[25],[29]] #,[65],[116],[336],[646],[124454],[4457]
+x = [[1,2],[3,4],[5,6],[6,7],[8,9],[10,11],[10,12],[11,13],[12,13],[14,15],[15,18],[20, 17],[21,20],[23,21],[16,10],[10,1]] #,[50,15],[70,46],[323,13],[131,515],[123123,2331],[134,4323]
+y = [[-1],[-1],[-1],[-1],[-1],[-1],[-2],[-2],[-1],[-1],[-3],[3],[1],[2],[6],[9]] #,[65],[116],[336],[646],[124454],[4457]
 
 X = torch.tensor(x).float() # 将x转换成张量
 Y = torch.tensor(y).float() # 将y转换成张量
@@ -37,9 +37,9 @@ class MyNeuralNetwork(nn.Module):
     def __init__(self):
         super(MyNeuralNetwork, self).__init__()
         # 创建神经网络的层就是直接调用一些nn提供的函数来实现的
-        self.input_to_hidden_layer = nn.Linear(2, 10) # 输入层到隐藏层 nn.Linear(2,10)表示输入层有2个神经元，隐藏层有10个神经元
-        self.hidden_to_output_layer = nn.Linear(10, 1) # 隐藏层到输出层
-        self.hidden_layer_activation = nn.ReLU() # 激活函数
+        self.input_to_hidden_layer = nn.Linear(2, 100) # 输入层到隐藏层 nn.Linear(2,10)表示输入层有2个神经元，隐藏层有10个神经元
+        self.hidden_to_output_layer = nn.Linear(100, 1) # 隐藏层到输出层
+        self.hidden_layer_activation = nn.LeakyReLU() # 激活函数
 
     def forward(self, x):
         # 前向传播 表达层与层之间的逻辑关系
@@ -91,7 +91,7 @@ optimizer = SGD(mynet.parameters(), lr=0.0015) # 随机梯度下降优化器 lr 
 ##################################################################################################
 
 loss_history = [] # 创建一个空列表，用于保存损失值
-train_epoch = 1000 # 训练次数
+train_epoch = 100 # 训练次数
 
 start = time.time() # 记录开始时间
 for epoch in range(train_epoch):
@@ -115,10 +115,14 @@ for epoch in range(train_epoch):
 end = time.time() # 记录结束时间
 print("训练时间：", end - start) # 打印训练时间
 
-val_x = [[13,19]] # 1*2的list
-val_x = torch.tensor(val_x).float().to(device) # 将val_x转换成张量
-prediction = mynet(val_x) # 预测val_x的值
-prediction_int = round(prediction.item()) # 将预测值转换成整数
-print("{} + {} = ".format(val_x[0][0],val_x[0][1]) + str(prediction_int)) # 打印预测值
+for i in range(1, 10):
+    val_x1 = float(input("请输入第一个数字："))
+    val_x2 = float(input("请输入第二个数字："))
 
-torch.save(mynet.state_dict(), './weight/BP_Pytorch.pth') # 保存神经网络的参数
+    val_x = [[val_x1,val_x2]] # 1*2的list
+    val_x = torch.tensor(val_x).float().to(device) # 将val_x转换成张量
+    prediction = mynet(val_x) # 预测val_x的值
+    prediction_int = round(prediction.item()) # 将预测值转换成整数
+    print("{} - {} = ".format(val_x[0][0],val_x[0][1]) + str(prediction_int)) # 打印预测值
+
+# torch.save(mynet.state_dict(), './weight/BP_Pytorch.pth') # 保存神经网络的参数

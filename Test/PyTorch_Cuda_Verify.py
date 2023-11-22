@@ -4,8 +4,10 @@ import time
 def check_cuda(): # 检查CUDA是否可用
     if torch.cuda.is_available(): # torch.cuda.is_available()函数用于检查CUDA是否可用
         print("CUDA is available") # 如果CUDA可用，则打印CUDA is available
+        return 'cuda'
     else:
         print("CUDA is not available") # 如果CUDA不可用，则打印CUDA is not available
+        return 'cpu'
 
 def check_cudnn(): # 检查cuDNN是否可用
     if torch.backends.cudnn.is_available(): # torch.backends.cudnn.is_available()函数用于检查cuDNN是否可用
