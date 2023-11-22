@@ -1,5 +1,5 @@
 import torch
-
+import time
 
 def check_cuda(): # 检查CUDA是否可用
     if torch.cuda.is_available(): # torch.cuda.is_available()函数用于检查CUDA是否可用
@@ -22,3 +22,4 @@ def check_torch_cuda_version(): # 检查PyTorch的CUDA版本
 
 
 print("Pytorch_Cuda_Verify.py is running...")
+time.sleep(1)
