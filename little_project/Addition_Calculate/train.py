@@ -11,7 +11,7 @@ from torch.utils.data import Dataset, DataLoader # 导入数据集和数据加�
 import torch
 import torch.nn as nn # 导入神经网络模块
 from torch.optim import SGD # 导入随机梯度下降优化器
-import time # 导入时间模块
+import time # 导入时间模块z
 import Test.PyTorch_Cuda_Verify as cuda_verify #导入pytorch_cuda驗證模塊
 import matplotlib.pyplot as plt # 导入绘图模块
 

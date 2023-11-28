@@ -3,6 +3,8 @@ import os, os.path as osp
 import sys
 import cv2 as cv, matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.ticker import PercentFormatter
+
 
 from torchvision import datasets
 import torch
